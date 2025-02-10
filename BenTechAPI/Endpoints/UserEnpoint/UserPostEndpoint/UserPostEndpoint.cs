@@ -3,6 +3,7 @@ using BenTechAPI.Models;
 using BenTechAPI.Security;
 using FastEndpoints;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace BenTechAPI.Endpoints.UserEnpoint.UserPostEndpoint
 {
@@ -25,6 +26,20 @@ namespace BenTechAPI.Endpoints.UserEnpoint.UserPostEndpoint
 
         public override async Task HandleAsync(UserPostRequest req, CancellationToken ct)
         {
+            var existingUser = await _context.User
+                .FirstOrDefaultAsync(u => u.User_name == req.FirstName, ct);
+            if (existingUser != null)
+            {
+                var errorResponse = new UserPostResponse
+                {
+                    FullName = req.FirstName,
+                    IsAdmin = req.IsAdmin,
+                    ErrorMessage = "Nome de usuário já está em uso."
+                };
+
+                await SendAsync(errorResponse, statusCode: 400, cancellation: ct);
+                return;
+            }
             string hashedPassword = _passwordHasher.HashPassword(req.Password);
 
             var user = new User
@@ -47,3 +62,4 @@ namespace BenTechAPI.Endpoints.UserEnpoint.UserPostEndpoint
         }
     }
 }
+

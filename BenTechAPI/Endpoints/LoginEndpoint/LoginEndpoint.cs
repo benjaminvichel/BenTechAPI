@@ -47,7 +47,8 @@ namespace BenTechAPI.Endpoints.LoginEndpoint
             await SendAsync(new LoginResponse
             {
                 Username = req.Username,
-                Token = jwtToken
+                Token = jwtToken,
+                IsAdmin = user.IsAdmin
             });
 
 
