@@ -8,7 +8,7 @@ namespace BenTechAPI.Models
     {
         [Key]
         public DateTime Date { get; set; }
-        [ForeignKey("PredefinedPrices")]
+        [ForeignKey(nameof(PredefinedPrices))]
         [Column(TypeName ="varchar(10)")]
         public string ColorCode { get;set; }
 
