@@ -1,6 +1,7 @@
 ﻿using BenTechAPI.Data;
 using BenTechAPI.Models;
 using FastEndpoints;
+using FastEndpoints.AspVersioning;
 
 namespace BenTechAPI.Endpoints.DatesEnpoint.Day_PredefinedPricesPostEnspoint
 {
@@ -13,7 +14,10 @@ namespace BenTechAPI.Endpoints.DatesEnpoint.Day_PredefinedPricesPostEnspoint
         }
         public override void Configure()
         {
-            Post("api/day");
+            Options(x => x
+           .WithVersionSet(">>Dates<<")
+           .MapToApiVersion(1.0));
+            Post("api/date");
             AllowAnonymous();
         }
 

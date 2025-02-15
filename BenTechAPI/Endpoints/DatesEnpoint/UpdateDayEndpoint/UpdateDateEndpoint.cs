@@ -1,5 +1,6 @@
 ﻿using BenTechAPI.Data;
 using FastEndpoints;
+using FastEndpoints.AspVersioning;
 using Microsoft.EntityFrameworkCore;
 
 namespace BenTechAPI.Endpoints.DatesEnpoint.UpdateDayEndpoint
@@ -14,7 +15,10 @@ namespace BenTechAPI.Endpoints.DatesEnpoint.UpdateDayEndpoint
         }
         public override void Configure()
         {
-            Put("api/Date");
+            Options(x => x
+            .WithVersionSet(">>Dates<<")
+            .MapToApiVersion(1.0));
+            Put("api/date");
             AllowAnonymous();
         }
         public override async Task HandleAsync(UpdateRequest req, CancellationToken ct)

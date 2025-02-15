@@ -1,11 +1,12 @@
 ﻿using BenTechAPI.Data;
 using BenTechAPI.Models;
 using FastEndpoints;
+using FastEndpoints.AspVersioning;
 using Microsoft.EntityFrameworkCore;
 
 namespace BenTechAPI.Endpoints.DatesEnpoint.GetAllDaysWithPredefinedPrices
 {
-    public class GetAllDaysWithPredefinedPricesEndpoint : EndpointWithoutRequest<List<Dates>>
+    public class GetAllDaysWithPredefinedPricesEndpoint : EndpointWithoutRequest<List<DayDto>>
     {
         private readonly ApplicationDBContext _dbContext;
 
@@ -17,7 +18,10 @@ namespace BenTechAPI.Endpoints.DatesEnpoint.GetAllDaysWithPredefinedPrices
 
         public override void Configure()
         {
-            Get("api/daysWithPredefinedPrices");
+            Options(x => x
+           .WithVersionSet(">>Dates<<")
+           .MapToApiVersion(1.0));
+            Get("api/dateWithPredefinedPrices");
             AllowAnonymous();
         }
 
@@ -26,7 +30,7 @@ namespace BenTechAPI.Endpoints.DatesEnpoint.GetAllDaysWithPredefinedPrices
         {
 
             var dates = await _dbContext.Dates
-                .Include(d => d.predefinedPrices)
+                .Include(d => d.PredefinedPrices)
                 .ToListAsync(ct);
 
 
@@ -34,16 +38,16 @@ namespace BenTechAPI.Endpoints.DatesEnpoint.GetAllDaysWithPredefinedPrices
             {
                 Date = d.Date,
                 ColorCode = d.ColorCode,
-                DoubleValue = d.predefinedPrices?.Double_value,
-                SingleValue = d.predefinedPrices?.Single_value,
-                TripleValue = d.predefinedPrices?.Triple_value,
-                QuadrupleValue = d.predefinedPrices?.Quadruple_value,
-                QuintupleValue = d.predefinedPrices?.Quintuple_value,
-                Child03To06Value = d.predefinedPrices?.Child03To06_value,
-                Child07To10Value = d.predefinedPrices?.Child07To10_value
+                DoubleValue = d.PredefinedPrices?.Double_value,
+                SingleValue = d.PredefinedPrices?.Single_value,
+                TripleValue = d.PredefinedPrices?.Triple_value,
+                QuadrupleValue = d.PredefinedPrices?.Quadruple_value,
+                QuintupleValue = d.PredefinedPrices?.Quintuple_value,
+                Child03To06Value = d.PredefinedPrices?.Child03To06_value,
+                Child07To10Value = d.PredefinedPrices?.Child07To10_value
             }).ToList();
 
-            await SendAsync(dates, cancellation: ct);
+            await SendAsync(dayDtos, cancellation: ct);
         }
 
     }

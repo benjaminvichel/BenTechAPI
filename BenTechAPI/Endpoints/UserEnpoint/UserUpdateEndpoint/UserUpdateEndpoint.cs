@@ -1,6 +1,7 @@
 ﻿using BenTechAPI.Data;
 using BenTechAPI.Endpoints.DatesEnpoint.UpdateDayEndpoint;
 using FastEndpoints;
+using FastEndpoints.AspVersioning;
 using Microsoft.EntityFrameworkCore;
 
 namespace BenTechAPI.Endpoints.UserEnpoint.UserUpdateEndpoint
@@ -15,6 +16,9 @@ namespace BenTechAPI.Endpoints.UserEnpoint.UserUpdateEndpoint
 
         public override void Configure()
         {
+            Options(x => x
+           .WithVersionSet(">>User<<")
+           .MapToApiVersion(1.0));
             Put("api/user");
             AllowAnonymous();
         }

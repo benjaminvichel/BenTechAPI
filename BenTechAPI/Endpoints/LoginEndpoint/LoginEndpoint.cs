@@ -1,6 +1,7 @@
 ﻿using BenTechAPI.Data;
 using BenTechAPI.Security;
 using FastEndpoints;
+using FastEndpoints.AspVersioning;
 using FastEndpoints.Security;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,7 +21,9 @@ namespace BenTechAPI.Endpoints.LoginEndpoint
 
         public override void Configure()
         {
-
+            Options(x => x
+           .WithVersionSet(">>Login<<")
+           .MapToApiVersion(1.0));
             Post("api/login");
             AllowAnonymous();
         }

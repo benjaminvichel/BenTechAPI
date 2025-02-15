@@ -1,6 +1,7 @@
 ﻿using BenTechAPI.Data;
 using BenTechAPI.Models;
 using FastEndpoints;
+using FastEndpoints.AspVersioning;
 using Microsoft.EntityFrameworkCore;
 
 namespace BenTechAPI.Endpoints.UserEnpoint.UserGetAllEndpoint
@@ -15,11 +16,14 @@ namespace BenTechAPI.Endpoints.UserEnpoint.UserGetAllEndpoint
         }
         public override void Configure()
         {
+            Options(x => x
+              .WithVersionSet(">>User<<")
+              .MapToApiVersion(1.0));
             Get("api/users");
         }
         public override async Task HandleAsync(CancellationToken ct)
         {
-            var users = await _context.User.ToListAsync();
+            var users =  await _context.User.ToListAsync();
             await SendAsync(users, cancellation: ct);
         }
     }

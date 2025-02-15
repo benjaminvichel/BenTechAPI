@@ -15,5 +15,7 @@ namespace BenTechAPI.Models
         public double Quintuple_value { get; set; }
         public double Child03To06_value { get; set; }
         public double Child07To10_value { get; set; }
+
+        public List<Dates>? Dates { get; set; }
     }
 }

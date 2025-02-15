@@ -1,5 +1,6 @@
 ﻿using BenTechAPI.Data;
 using FastEndpoints;
+using FastEndpoints.AspVersioning;
 using Microsoft.OpenApi.Models;
 
 namespace BenTechAPI.Endpoints.UserEnpoint.UserGetByIdEndpoint
@@ -15,6 +16,9 @@ namespace BenTechAPI.Endpoints.UserEnpoint.UserGetByIdEndpoint
 
         public override void Configure()
         {
+            Options(x => x
+           .WithVersionSet(">>User<<")
+           .MapToApiVersion(1.0));
             Get("/api/users/{id}");
             AllowAnonymous();
             Summary(s =>

@@ -1,6 +1,6 @@
 ﻿namespace BenTechAPI.Endpoints.DatesEnpoint.GetAllDaysWithPredefinedPrices
 {
-    internal class DayDto
+    public class DayDto
     {
         public DateTime Date { get; set; }
         public string ColorCode { get; set; }

@@ -2,6 +2,7 @@
 using BenTechAPI.Models;
 using BenTechAPI.Security;
 using FastEndpoints;
+using FastEndpoints.AspVersioning;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +21,9 @@ namespace BenTechAPI.Endpoints.UserEnpoint.UserPostEndpoint
 
         public override void Configure()
         {
+            Options(x => x
+           .WithVersionSet(">>User<<")
+           .MapToApiVersion(1.0));
             Post("/api/user/create");
             AllowAnonymous();
         }
