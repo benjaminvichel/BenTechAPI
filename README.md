@@ -20,7 +20,15 @@ Antes de rodar a aplicação, configure a seguinte variável no sistema:
 ```powershell
 - export ConnectionStrings__DefaultConnection="Server=<SERVIDOR>;Database=<NOME_DO_BANCO>;User Id=<USUARIO>;Password=<SENHA>;TrustServerCertificate=True;"
 ```
+**Alteração no program.cs:**
 
+Altere a string "DemoConnection" pela escolhida na etapa anterior!
+```powershell
+builder.Services.AddDbContext<ApplicationDBContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DemoConnection"));
+});
+```
 ## 3. Restaurar os pacotes NuGet
 Dentro da pasta do projeto, execute:
 ```powershell
