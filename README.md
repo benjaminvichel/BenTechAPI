@@ -1,3 +1,7 @@
+<div align="center" style="display: flex; justify-content: center; gap: 20px;">
+    <img src="https://github.com/user-attachments/assets/78c74655-d85d-483d-afd6-faca885a1c0a" width="1000px">
+</div>
+
 # API BenTech
 
  Esta API ainda não está finalizada e encontra-se em fase de desenvolvimento!!
