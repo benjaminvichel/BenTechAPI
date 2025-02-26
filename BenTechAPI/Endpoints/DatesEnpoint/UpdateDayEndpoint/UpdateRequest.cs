@@ -1,8 +1,13 @@
-﻿namespace BenTechAPI.Endpoints.DatesEnpoint.UpdateDayEndpoint
+﻿using Swashbuckle.AspNetCore.Annotations;
+using System.ComponentModel.DataAnnotations;
+
+namespace BenTechAPI.Endpoints.DatesEnpoint.UpdateDayEndpoint
 {
     public class UpdateRequest
     {
-        public DateTime Date { get; set; }
+        [SwaggerSchema(Description = "Format: yyyy-MM-dd")]
+        [DataType(DataType.Date)]
+        public DateOnly Date { get; set; }
         public string colorCode { get; set; }
     }
 }

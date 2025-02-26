@@ -2,6 +2,9 @@
 using BenTechAPI.Models;
 using FastEndpoints;
 using FastEndpoints.AspVersioning;
+using Swashbuckle.AspNetCore.Annotations;
+using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 
 namespace BenTechAPI.Endpoints.DatesEnpoint.Day_PredefinedPricesPostEnspoint
 {
@@ -18,7 +21,6 @@ namespace BenTechAPI.Endpoints.DatesEnpoint.Day_PredefinedPricesPostEnspoint
            .WithVersionSet(">>Dates<<")
            .MapToApiVersion(1.0));
             Post("api/date");
-            AllowAnonymous();
         }
 
         public override async Task HandleAsync(DayAndPriceRequest req, CancellationToken ct)
@@ -35,7 +37,7 @@ namespace BenTechAPI.Endpoints.DatesEnpoint.Day_PredefinedPricesPostEnspoint
 
             await SendAsync(new()
             {
-                Date = req.Date,
+                Date = day.Date,
                 ColorCode = req.ColorCode
             }, cancellation: ct);
         }
@@ -43,13 +45,17 @@ namespace BenTechAPI.Endpoints.DatesEnpoint.Day_PredefinedPricesPostEnspoint
 
     public class DayAndPriceResponse
     {
-        public DateTime Date { get; set; }
+        [SwaggerSchema(Description = "Format: yyyy-MM-dd")]
+        [DataType(DataType.Date)]
+        public DateOnly Date { get; set; }
         public string ColorCode { get; set; }
     }
 
     public class DayAndPriceRequest
     {
-        public DateTime Date { get; set; }
+        [SwaggerSchema(Description = "Format: yyyy-MM-dd")]
+        [DataType(DataType.Date)]
+        public DateOnly Date { get; set; }
         public string ColorCode { get; set; }
     }
 }

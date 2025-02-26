@@ -2,7 +2,7 @@
 {
     public class DayDto
     {
-        public DateTime Date { get; set; }
+        public DateOnly Date { get; set; }
         public string ColorCode { get; set; }
         public double? DoubleValue { get; set; }
         public double? SingleValue { get; set; }

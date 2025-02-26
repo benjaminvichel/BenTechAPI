@@ -7,7 +7,8 @@ namespace BenTechAPI.Models
     public class Dates
     {
         [Key]
-        public DateTime Date { get; set; }
+        [Column(TypeName = "date")]
+        public DateOnly Date { get; set; }
         [ForeignKey("ColorCode")]
         [Column(TypeName ="varchar(10)")]
         public string ColorCode { get;set; }

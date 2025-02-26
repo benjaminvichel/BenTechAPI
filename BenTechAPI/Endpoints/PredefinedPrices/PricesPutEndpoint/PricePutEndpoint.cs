@@ -21,7 +21,6 @@ namespace BenTechAPI.Endpoints.PredefinedPrices.PricesPutEndpoint
             .MapToApiVersion(1.0)
             );
             Put("api/price");
-            AllowAnonymous();
         }
 
         public override async Task HandleAsync(PricePutRequest req, CancellationToken ct)
@@ -32,6 +31,7 @@ namespace BenTechAPI.Endpoints.PredefinedPrices.PricesPutEndpoint
             {
 
                 price.ColorCode = req.ColorCode;
+                price.Name = req.Name;
                 price.Double_value = req.Double_value;
                 price.Single_value = req.Single_value;
                 price.Triple_value = req.Triple_value;
@@ -70,6 +70,7 @@ namespace BenTechAPI.Endpoints.PredefinedPrices.PricesPutEndpoint
     public class PricePutRequest
     {
         public string ColorCode { get; set; }
+        public string Name { get; set; }
         public double Double_value { get; set; }
         public double Single_value { get; set; }
         public double Triple_value { get; set; }

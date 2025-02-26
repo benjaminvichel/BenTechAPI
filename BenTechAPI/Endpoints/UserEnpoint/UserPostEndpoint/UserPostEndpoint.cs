@@ -25,7 +25,6 @@ namespace BenTechAPI.Endpoints.UserEnpoint.UserPostEndpoint
            .WithVersionSet(">>User<<")
            .MapToApiVersion(1.0));
             Post("/api/user/create");
-            AllowAnonymous();
         }
 
         public override async Task HandleAsync(UserPostRequest req, CancellationToken ct)

@@ -5,7 +5,7 @@ using Microsoft.OpenApi.Models;
 
 namespace BenTechAPI.Endpoints.UserEnpoint.UserGetByIdEndpoint
 {
-    public class UserGetByIdEndpoint : Endpoint<UserGetIdRequest, UserGetIdResponse>
+    public class UserGetByIdEndpoint : EndpointWithoutRequest<UserGetIdResponse>
     {
         private readonly ApplicationDBContext _context;
 
@@ -20,7 +20,6 @@ namespace BenTechAPI.Endpoints.UserEnpoint.UserGetByIdEndpoint
            .WithVersionSet(">>User<<")
            .MapToApiVersion(1.0));
             Get("/api/users/{id}");
-            AllowAnonymous();
             Summary(s =>
             {
                 s.Summary = "Obtém um usuário pelo ID";
@@ -29,7 +28,7 @@ namespace BenTechAPI.Endpoints.UserEnpoint.UserGetByIdEndpoint
             });
         }
 
-        public override async Task HandleAsync(UserGetIdRequest req, CancellationToken ct)
+        public override async Task HandleAsync(CancellationToken ct)
         {
             var id = Route<Guid>("id");
 

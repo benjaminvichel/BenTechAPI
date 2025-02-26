@@ -24,13 +24,12 @@ namespace BenTechAPI.Endpoints.DatesEnpoint.DateDeleteEndpoint
             .MapToApiVersion(1.0)
             );
             Delete("api/date/{date}");
-            AllowAnonymous();
         }
 
 
         public override async Task HandleAsync(CancellationToken ct)
         {
-            var date = Route<DateTime>("date");
+            var date = Route<DateOnly>("date");
 
             var dateExist = await _dbContext.Dates.FirstOrDefaultAsync(d => d.Date == date);
 

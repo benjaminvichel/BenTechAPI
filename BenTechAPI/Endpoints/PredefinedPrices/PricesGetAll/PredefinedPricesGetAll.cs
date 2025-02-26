@@ -20,7 +20,6 @@
             .WithVersionSet(">>Prices<<")
             .MapToApiVersion(1.0));
             Get("api/v1/prices");
-            AllowAnonymous();
         }
 
         public override async Task HandleAsync(CancellationToken ct)
@@ -29,10 +28,11 @@
             var prices = await _dbContext.PredefinedPrices
                 .Include(p => p.Dates)
                 .ToListAsync(ct);
-            
+
             var pricesDto = prices.Select(p => new PredefinedPricesDto
             {
                 ColorCode = p.ColorCode,
+                Name = p.Name,
                 Double_value = p.Double_value,
                 Single_value = p.Single_value,
                 Triple_value = p.Triple_value,
@@ -48,21 +48,22 @@
         }
     }
 
-   public class PredefinedPricesDto
-{
-    public string ColorCode { get; set; }
-    public double Double_value { get; set; }
-    public double Single_value { get; set; }
-    public double Triple_value { get; set; }
-    public double Quadruple_value { get; set; }
-    public double Quintuple_value { get; set; }
-    public double Child03To06_value { get; set; }
-    public double Child07To10_value { get; set; }
-    public List<DateDto>? Dates { get; set; }
-}
+    public class PredefinedPricesDto
+    {
+        public string ColorCode { get; set; }
+        public string Name { get; set; }
+        public double Double_value { get; set; }
+        public double Single_value { get; set; }
+        public double Triple_value { get; set; }
+        public double Quadruple_value { get; set; }
+        public double Quintuple_value { get; set; }
+        public double Child03To06_value { get; set; }
+        public double Child07To10_value { get; set; }
+        public List<DateDto>? Dates { get; set; }
+    }
 
-public class DateDto
-{
-    public DateTime Date { get; set; }
-}
+    public class DateDto
+    {
+        public DateOnly Date { get; set; }
+    }
 }

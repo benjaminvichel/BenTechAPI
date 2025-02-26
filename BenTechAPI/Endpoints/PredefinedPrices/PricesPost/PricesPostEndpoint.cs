@@ -20,7 +20,6 @@ namespace BenTechAPI.Endpoints.PredefinedPrices.PricesPost
             .MapToApiVersion(1.0)
             );
             Post("api/prices");
-            AllowAnonymous();
         }
 
 
@@ -43,6 +42,7 @@ namespace BenTechAPI.Endpoints.PredefinedPrices.PricesPost
             var price = new BenTechAPI.Models.PredefinedPrices
             {
                 ColorCode = req.ColorCode,
+                Name = req.Name,
                 Double_value = req.Double_value,
                 Single_value = req.Single_value,
                 Triple_value = req.Triple_value,
@@ -71,6 +71,7 @@ namespace BenTechAPI.Endpoints.PredefinedPrices.PricesPost
     public class PricesPostRequest
     {
         public string ColorCode { get; set; }
+        public string Name { get; set; }
         public double Double_value { get; set; }
         public double Single_value { get; set; }
         public double Triple_value { get; set; }

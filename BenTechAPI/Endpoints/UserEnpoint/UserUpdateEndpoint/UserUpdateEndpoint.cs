@@ -20,7 +20,6 @@ namespace BenTechAPI.Endpoints.UserEnpoint.UserUpdateEndpoint
            .WithVersionSet(">>User<<")
            .MapToApiVersion(1.0));
             Put("api/user");
-            AllowAnonymous();
         }
 
         public override async Task HandleAsync(UpdateUser req, CancellationToken ct)

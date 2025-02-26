@@ -2,6 +2,7 @@
 using FastEndpoints;
 using FastEndpoints.AspVersioning;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace BenTechAPI.Endpoints.DatesEnpoint.UpdateDayEndpoint
 {
@@ -19,10 +20,10 @@ namespace BenTechAPI.Endpoints.DatesEnpoint.UpdateDayEndpoint
             .WithVersionSet(">>Dates<<")
             .MapToApiVersion(1.0));
             Put("api/date");
-            AllowAnonymous();
         }
         public override async Task HandleAsync(UpdateRequest req, CancellationToken ct)
         {
+         
             var day = await _dbContext.Dates.FirstOrDefaultAsync(d => d.Date == req.Date, ct);
             if (day != null)
             {

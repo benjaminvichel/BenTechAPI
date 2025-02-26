@@ -23,8 +23,7 @@ namespace BenTechAPI.Endpoints.PredefinedPrices.PredefinedPricesDeleteEndpoint
             .WithVersionSet(">>Prices<<")
             .MapToApiVersion(1.0)
             );
-            Delete("api/prices/{colorCode}");
-            AllowAnonymous();
+            Delete("api/price/{colorCode}");
         }
 
         public override async Task HandleAsync(CancellationToken ct)

@@ -22,7 +22,6 @@ namespace BenTechAPI.Endpoints.DatesEnpoint.GetAllDaysWithPredefinedPrices
            .WithVersionSet(">>Dates<<")
            .MapToApiVersion(1.0));
             Get("api/dateWithPredefinedPrices");
-            AllowAnonymous();
         }
 
 

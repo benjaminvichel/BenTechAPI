@@ -8,6 +8,7 @@ namespace BenTechAPI.Models
         [Key]
         [Column(TypeName = "varchar(10)")]
         public string ColorCode { get; set; }
+        public string Name { get; set; }
         public double Double_value { get; set; }
         public double Single_value { get; set; }
         public double Triple_value { get; set; }
