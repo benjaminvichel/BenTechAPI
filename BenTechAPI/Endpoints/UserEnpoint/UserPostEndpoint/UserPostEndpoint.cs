@@ -30,12 +30,12 @@ namespace BenTechAPI.Endpoints.UserEnpoint.UserPostEndpoint
         public override async Task HandleAsync(UserPostRequest req, CancellationToken ct)
         {
             var existingUser = await _context.User
-                .FirstOrDefaultAsync(u => u.User_name == req.FirstName, ct);
-            if (existingUser != null)
+                .FirstOrDefaultAsync(u => u.User_name == req.User_name, ct);
+            if (existingUser != null || req.User_name.Equals(""))
             {
                 var errorResponse = new UserPostResponse
                 {
-                    FullName = req.FirstName,
+                    User_name = req.User_name,
                     IsAdmin = req.IsAdmin,
                     ErrorMessage = "Nome de usuário já está em uso."
                 };
@@ -48,7 +48,7 @@ namespace BenTechAPI.Endpoints.UserEnpoint.UserPostEndpoint
             var user = new User
             {
                 Id = Guid.NewGuid(),
-                User_name = req.FirstName,
+                User_name = req.User_name,
                 Password = hashedPassword,
                 IsAdmin = req.IsAdmin
             };
@@ -59,7 +59,7 @@ namespace BenTechAPI.Endpoints.UserEnpoint.UserPostEndpoint
 
             await SendAsync(new()
             {
-                FullName = req.FirstName,
+                User_name = req.User_name,
                 IsAdmin = req.IsAdmin
             }, cancellation: ct);
         }
