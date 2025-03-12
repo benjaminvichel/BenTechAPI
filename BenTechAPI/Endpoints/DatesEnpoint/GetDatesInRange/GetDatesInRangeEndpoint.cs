@@ -36,7 +36,15 @@ namespace BenTechAPI.Endpoints.DatesEnpoint.GetDatesInRange
             List<DateRangeResponse> dateRangeResponse = dates.Select(d => new DateRangeResponse
             {
                 Date = d.Date,
-                ColorCode = d.ColorCode
+                ColorCode = d.ColorCode,
+                DoubleValue = d.PredefinedPrices.Double_value,
+                SingleValue = d.PredefinedPrices.Single_value,
+                TripleValue = d.PredefinedPrices.Triple_value,
+                QuadrupleValue= d.PredefinedPrices.Quadruple_value,
+                QuintupleValue = d.PredefinedPrices .Quintuple_value,
+                Child03To06Value=d.PredefinedPrices.Child03To06_value,
+                Child07To10Value = d.PredefinedPrices.Child07To10_value,
+               
             }).ToList();
             await SendAsync(dateRangeResponse, cancellation: ct);
 

@@ -31,7 +31,7 @@ namespace BenTechAPI.Endpoints.UserEnpoint.UserUpdateEndpoint
             if (user != null)
             {
 
-                user.User_name = req.UserName;
+                user.User_name = req.User_name;
                 user.IsAdmin = req.IsAdmin;
 
 
