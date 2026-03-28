@@ -2,60 +2,56 @@
     <img src="https://github.com/user-attachments/assets/78c74655-d85d-483d-afd6-faca885a1c0a" width="1000px">
 </div>
 
-# API BenTech
+# BenTech API
 
- Esta API ainda não está finalizada e encontra-se em fase de desenvolvimento!!
+A dedicated internal API built to power the **BenTech Hotel Daily Rate Calculator**, handling all communication between the frontend, business logic, and the SQL Server database in a structured and scalable way.
 
-A API foi desenvolvida para o projeto **BenTechPatternMVP** que está em fase de desenvolvimento, mas que também está disponível no repositório.
+## How to Run Locally
 
-# Como baixar e testar a API
+### 1. Clone the repository
 
-## 1. Clonar o repositório
-## 2. Configurar a conexão com o banco de dados
+### 2. Configure the database connection
 
-A API utiliza **SQL Server**, e a string de conexão está definida em variáveis de ambiente.  
-Antes de rodar a aplicação, configure a seguinte variável no sistema:
+The API uses **SQL Server**. Set the connection string as an environment variable before running:
 
-**Windows (PowerShell)**:
-  ```powershell
-  $Env:ConnectionStrings__DefaultConnection="Server=<SERVIDOR>;Database=<NOME_DO_BANCO>;User Id=<USUARIO>;Password=<SENHA>;TrustServerCertificate=True;"
-```
-**Linux/macOS (bash)**:
+**Windows (PowerShell):**
 ```powershell
-- export ConnectionStrings__DefaultConnection="Server=<SERVIDOR>;Database=<NOME_DO_BANCO>;User Id=<USUARIO>;Password=<SENHA>;TrustServerCertificate=True;"
+$Env:ConnectionStrings__DefaultConnection="Server=<SERVER>;Database=<DATABASE>;User Id=<USER>;Password=<PASSWORD>;TrustServerCertificate=True;"
 ```
-**Alteração no program.cs:**
 
-Altere a string "DemoConnection" pela escolhida na etapa anterior!
-```powershell
+**Linux/macOS (bash):**
+```bash
+export ConnectionStrings__DefaultConnection="Server=<SERVER>;Database=<DATABASE>;User Id=<USER>;Password=<PASSWORD>;TrustServerCertificate=True;"
+```
+
+Then update `program.cs` to match the connection string name you defined:
+```csharp
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DemoConnection"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 ```
-## 3. Restaurar os pacotes NuGet
-Dentro da pasta do projeto, execute:
+
+### 3. Restore NuGet packages
 ```powershell
 dotnet restore
 ```
-## 4.Aplicar as migrations e criar o banco de dados
 
-Caso o banco ainda não tenha sido criado, execute:
+### 4. Apply migrations
 ```powershell
 dotnet ef database update
 ```
-Isso irá criar as tabelas e estruturas necessárias.
 
-## 5. Rodar a API
-
-Para iniciar a API, utilize o comando:
+### 5. Run the API
 ```powershell
 dotnet run
 ```
-A API estará disponível em http://localhost:7033.
 
-## 🛠️ Tecnologias Utilizadas  
+The API will be available at http://localhost:7033.
 
-- **Linguagem:** C# / .NET 8.0
-- **Framework:** [FastEndpoints](https://fast-endpoints.com/)  
-- **Ferramentas:** Swagger  
+## Tech Stack
+
+- **Language:** C# / .NET 8.0
+- **Framework:** FastEndpoints
+- **Tools:** Swagger
+```
